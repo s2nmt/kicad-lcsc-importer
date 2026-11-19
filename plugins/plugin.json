@@ -1,0 +1,26 @@
+{
+  "identifier": "local.maruyama.lcsc-importer",
+  "name": "LCSC Importer",
+  "description": "Import EasyEDA parts into the maruyama KiCad library.",
+  "runtime": {
+    "type": "python"
+  },
+  "actions": [
+    {
+      "identifier": "import-lcsc",
+      "name": "Import LCSC",
+      "description": "Import a symbol, footprint and available 3D models by LCSC number.",
+      "scopes": [
+        "pcb"
+      ],
+      "entrypoint": "main.py",
+      "show-button": true,
+      "icons-light": [
+        "import-lcsc.png"
+      ],
+      "icons-dark": [
+        "import-lcsc.png"
+      ]
+    }
+  ]
+}

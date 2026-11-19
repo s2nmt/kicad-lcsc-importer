@@ -1,0 +1,24 @@
+{
+  "author": {
+    "name": "robovix",
+    "contact": {}
+  },
+  "$schema": "https://go.kicad.org/pcm/schemas/v2",
+  "identifier": "local-maruyama-lcsc-importer",
+  "type": "plugin",
+  "description": "Import LCSC parts into your KiCad library.",
+  "license": "unrestricted",
+  "versions": [
+    {
+      "kicad_version": "10.0",
+      "status": "testing",
+      "runtime": "ipc",
+      "version": "1.0.2"
+    }
+  ],
+  "description_full": "Imports symbols, footprints and available 3D models using easyeda2kicad on Windows.",
+  "name": "LCSC Importer",
+  "resources": {
+    "upstream": "https://github.com/uPesy/easyeda2kicad.py"
+  }
+}
