@@ -1,7 +1,7 @@
 {
-  "identifier": "local.maruyama.lcsc-importer",
-  "name": "LCSC Importer",
-  "description": "Import EasyEDA parts into the maruyama KiCad library.",
+  "identifier": "local.robovix.lcsc-importer",
+  "name": "Kicad LCSC Importer",
+  "description": "Import LCSC parts into your KiCad library.",
   "runtime": {
     "type": "python"
   },

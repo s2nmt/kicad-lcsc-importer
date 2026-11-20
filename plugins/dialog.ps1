@@ -6,7 +6,7 @@ Add-Type -AssemblyName System.Drawing
 
 $form = New-Object Windows.Forms.Form
 $form.Text = 'Import LCSC'
-$form.ClientSize = [Drawing.Size]::new(560, 167)
+$form.ClientSize = [Drawing.Size]::new(560, 203)
 $form.FormBorderStyle = 'FixedDialog'
 $form.MaximizeBox = $false
 $form.MinimizeBox = $false
@@ -24,13 +24,15 @@ function Add-Control($type, $label, $x, $y, $width) {
 
 $null = Add-Control Label 'LCSC ID' 12 17 95
 $part = Add-Control TextBox '' 110 14 350
-$null = Add-Control Label 'Library folder' 12 53 95
+$null = Add-Control Label 'Library name' 12 53 95
+$libraryName = Add-Control TextBox $env:LCSC_IMPORTER_LIBRARY_NAME 110 50 350
+$null = Add-Control Label 'Library folder' 12 89 95
 $defaultFolder = Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'KiCad\10.0\libs'
-$folder = Add-Control TextBox $defaultFolder 110 50 350
-$browse = Add-Control Button 'Browse...' 468 48 80
-$overwrite = Add-Control CheckBox 'Overwrite existing library entries' 110 85 350
-$import = Add-Control Button 'Import' 380 125 80
-$cancel = Add-Control Button 'Cancel' 468 125 80
+$folder = Add-Control TextBox $defaultFolder 110 86 350
+$browse = Add-Control Button 'Browse...' 468 84 80
+$overwrite = Add-Control CheckBox 'Overwrite existing library entries' 110 121 350
+$import = Add-Control Button 'Import' 380 161 80
+$cancel = Add-Control Button 'Cancel' 468 161 80
 
 $browse.Add_Click({
     $picker = New-Object Windows.Forms.FolderBrowserDialog
@@ -47,6 +49,11 @@ $form.Add_Shown({ $part.Select() })
 
 try {
     if ($form.ShowDialog() -eq 'OK') {
-        @{part=$part.Text; folder=$folder.Text; overwrite=$overwrite.Checked} | ConvertTo-Json -Compress
+        @{
+            part = $part.Text
+            library_name = $libraryName.Text
+            folder = $folder.Text
+            overwrite = $overwrite.Checked
+        } | ConvertTo-Json -Compress
     }
 } finally { $form.Dispose() }
