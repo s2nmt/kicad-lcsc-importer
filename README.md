@@ -2,6 +2,10 @@
 
 A plugin for KiCad 10 on Windows. Enter an LCSC part number to export the symbol, footprint, and 3D model (if available) to a library of your choice.
 
+<p align="center">
+  <img src="img/image.png" alt="KiCad LCSC Importer screenshot" width="800">
+</p>
+
 ## Installation and usage
 
 1. Download `lcsc-importer-pcm.zip` from the repository's **Releases** section.
@@ -21,10 +25,10 @@ The plugin uses [uPesy's easyeda2kicad](https://github.com/uPesy/easyeda2kicad.p
 
 When a new upstream version is released, update the pin in `plugins/requirements.txt`, bump the plugin version in `metadata.json`, and test importing a part with a 3D model. The plugin reads the footprint path from the converter's log when linking 3D models, so verify that the footprint still resolves its model through the library's path variable after upgrading.
 
-To build the installation ZIP, run this command from the repository root. Only the person packaging the release needs to run it.
+To build the installation ZIP, open PowerShell in the repository root and run `build.py` with the Python executable bundled with KiCad 10. If you installed KiCad in a custom location, adjust the path to `python.exe` accordingly. Only the person packaging the release needs to run this command.
 
 ```powershell
-python build.py
+& "${env:ProgramFiles}\KiCad\10.0\bin\python.exe" .\build.py
 ```
 
 Attach `dist/lcsc-importer-pcm.zip` to the GitHub Release. Users can download the ZIP and install it directly in KiCad.
