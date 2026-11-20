@@ -1,27 +1,27 @@
 # LCSC Importer for KiCad
 
-Plugin cho KiCad 10 trên Windows. Nhập mã LCSC để xuất symbol, footprint và model 3D (nếu có) vào thư viện `maruyama`.
+A plugin for KiCad 10 on Windows. Enter an LCSC part number to export the symbol, footprint, and 3D model (if available) to the `maruyama` library.
 
-## Cài và sử dụng
+## Installation and usage
 
-1. Tải `lcsc-importer-pcm.zip` trong **Releases** của repo.
-2. Trong KiCad Manager, mở **Plugin and Content Manager → Install from File…** và chọn ZIP. Nếu KiCad yêu cầu gỡ bản cũ trước, chọn **Uninstall**, rồi bấm **Apply Pending Changes**.
-3. Trong **Preferences → Plugins**, bật **Enable KiCad API**. Giữ Python đi kèm KiCad. KiCad cài dependency vào môi trường riêng của plugin ở lần nạp đầu.
-4. Mở lại PCB Editor và tìm nút mũi tên trắng nền xanh **Import LCSC** trên thanh công cụ. Nhập mã như `C116151` và bấm **Import**.
-5. Đăng ký `maruyama.kicad_sym` và `maruyama.pretty` trong bảng thư viện tương ứng với nickname `maruyama`. Mặc định plugin xuất vào `Documents/KiCad/10.0/libs`. Trong **Preferences → Configure Paths…**, đặt `MARUYAMA_3D` trỏ tới thư mục `maruyama.3dshapes` bên trong thư mục xuất.
+1. Download `lcsc-importer-pcm.zip` from the repository's **Releases** section.
+2. In KiCad Manager, open **Plugin and Content Manager → Install from File…** and select the ZIP. If KiCad prompts you to remove the previous version first, select **Uninstall**, then click **Apply Pending Changes**.
+3. In **Preferences → Plugins**, turn on **Enable KiCad API**. Use the Python installation bundled with KiCad. KiCad installs the dependencies into the plugin's own environment the first time it loads.
+4. Reopen PCB Editor and find **Import LCSC** in the toolbar. Its icon is a white arrow on a blue background. Enter a part number such as `C116151` and click **Import**.
+5. Add `maruyama.kicad_sym` and `maruyama.pretty` to the symbol and footprint library tables, respectively. Use `maruyama` as the nickname in both tables. The default export folder is `Documents/KiCad/10.0/libs`. In **Preferences → Configure Paths…**, set `MARUYAMA_3D` to the `maruyama.3dshapes` folder inside the export folder.
 
-Nếu linh kiện dùng chung footprint, trình chuyển đổi có thể dừng khi gặp file trùng. Chọn **Overwrite existing library entries** khi bạn muốn thay thế các mục trùng trong thư viện.
+If multiple parts share a footprint, the converter may stop when it encounters an existing file. Select **Overwrite existing library entries** to replace duplicate entries.
 
-## Cập nhật và đóng gói
+## Updating and packaging
 
-Plugin chạy [easyeda2kicad của uPesy](https://github.com/uPesy/easyeda2kicad.py) từ [PyPI](https://pypi.org/project/easyeda2kicad/). Phiên bản hiện tại được ghim trong `plugins/requirements.txt` để mọi máy dùng cùng phiên bản engine. Upstream phát hành mã nguồn theo AGPL-3.0.
+The plugin uses [uPesy's easyeda2kicad](https://github.com/uPesy/easyeda2kicad.py) from [PyPI](https://pypi.org/project/easyeda2kicad/). The version is pinned in `plugins/requirements.txt` so every installation uses the same converter version. The upstream source code is licensed under AGPL-3.0.
 
-Khi upstream phát hành bản mới, sửa phiên bản trong `plugins/requirements.txt`, tăng phiên bản plugin trong `metadata.json` và thử nhập một linh kiện có model 3D. Phần liên kết model đọc đường dẫn footprint từ log của upstream, nên kiểm tra cả đường dẫn `MARUYAMA_3D` khi nâng cấp.
+When a new upstream version is released, update the pin in `plugins/requirements.txt`, bump the plugin version in `metadata.json`, and test importing a part with a 3D model. The plugin reads the footprint path from the converter's log when linking 3D models, so verify that the footprint still resolves its model through `MARUYAMA_3D` after upgrading.
 
-Chạy lệnh sau ở thư mục repo để tạo ZIP cài đặt. Chỉ người đóng gói cần chạy lệnh này.
+To build the installation ZIP, run this command from the repository root. Only the person packaging the release needs to run it.
 
 ```powershell
 python build.py
 ```
 
-Đính kèm `dist/lcsc-importer-pcm.zip` vào GitHub Release. Đồng đội tải file ZIP đó và cài trực tiếp trong KiCad.
+Attach `dist/lcsc-importer-pcm.zip` to the GitHub Release. Users can download the ZIP and install it directly in KiCad.
