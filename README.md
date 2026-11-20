@@ -11,7 +11,7 @@ A plugin for KiCad 10 on Windows. Enter an LCSC part number to export the symbol
 1. Download `lcsc-importer-pcm.zip` from the repository's **Releases** section.
 2. In KiCad Manager, open **Plugin and Content Manager → Install from File…** and select the ZIP. If you installed a company-branded release, uninstall it and click **Apply Pending Changes** before installing this ZIP. The new package uses a different identifier.
 3. In **Preferences → Plugins**, turn on **Enable KiCad API**. Use the Python installation bundled with KiCad. KiCad installs the dependencies into the plugin's own environment the first time it loads.
-4. Reopen PCB Editor and find **Import LCSC** in the toolbar. Its icon is a white arrow on a blue background. Enter a part number such as `C116151` and a **Library name** such as `my_parts`, then click **Import**. The default library name is `lcsc_importer`. Library names can contain letters A–Z, digits, underscores, and hyphens. Windows device names are reserved.
+4. Reopen PCB Editor and click **Import LCSC** <img src="plugins/import-lcsc.png" alt="Import LCSC toolbar icon" width="24"> in the toolbar. Enter a part number such as `C116151` and a **Library name** such as `my_parts`, then click **Import**. The default library name is `lcsc_importer`. Library names can contain letters A–Z, digits, underscores, and hyphens. Windows device names are reserved.
 
 If multiple parts share a footprint, the converter may stop when it encounters an existing file. Select **Overwrite existing library entries** to replace duplicate entries.
 
