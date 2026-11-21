@@ -48,16 +48,12 @@ The plugin uses [uPesy's easyeda2kicad](https://github.com/uPesy/easyeda2kicad.p
 
 When a new upstream version is released, update the pin in `plugins/requirements.txt`, bump the plugin version in `metadata.json`, and test importing a part with a 3D model. The plugin reads the footprint path from the converter's log when linking 3D models, so verify that the footprint still resolves its model through the library's path variable after upgrading.
 
-To build the installation ZIP, open PowerShell in the repository root and run `build.py` with Python 3. The build script uses only the Python standard library.
-
-```powershell
-python .\build.py
-```
-
-If PowerShell cannot find `python` and KiCad 10 was installed for your Windows user, use its bundled console Python:
+To build the installation ZIP, open PowerShell in the repository root and run `build.py` with the console Python bundled with KiCad 10. This command uses the per-user installation path on Windows.
 
 ```powershell
 & "$env:LOCALAPPDATA\Programs\KiCad\10.0\bin\python.exe" .\build.py
 ```
+
+If KiCad is installed in a different directory, use the path to `bin\python.exe` inside that installation.
 
 Attach `dist/kicad-lcsc-importer.zip` to the GitHub Release. Users can download the ZIP and install it directly in KiCad.
