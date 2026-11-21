@@ -16,7 +16,7 @@ def build():
 
     dist = ROOT / "dist"
     dist.mkdir(exist_ok=True)
-    target = dist / "lcsc-importer-pcm.zip"
+    target = dist / "kicad-lcsc-importer.zip"
     temporary = target.with_suffix(".tmp")
     with ZipFile(temporary, "w", ZIP_DEFLATED) as archive:
         archive.writestr("metadata.json", json.dumps(metadata, indent=2) + "\n")

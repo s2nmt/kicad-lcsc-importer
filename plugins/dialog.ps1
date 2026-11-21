@@ -27,7 +27,11 @@ $part = Add-Control TextBox '' 110 14 350
 $null = Add-Control Label 'Library name' 12 53 95
 $libraryName = Add-Control TextBox $env:LCSC_IMPORTER_LIBRARY_NAME 110 50 350
 $null = Add-Control Label 'Library folder' 12 89 95
-$defaultFolder = Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'KiCad\10.0\libs'
+$documentsHome = $env:KICAD_DOCUMENTS_HOME
+if (-not $documentsHome) {
+    $documentsHome = Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'KiCad'
+}
+$defaultFolder = Join-Path $documentsHome '10.0\libs'
 $folder = Add-Control TextBox $defaultFolder 110 86 350
 $browse = Add-Control Button 'Browse...' 468 84 80
 $overwrite = Add-Control CheckBox 'Overwrite existing library entries' 110 121 350

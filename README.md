@@ -1,4 +1,4 @@
-# Kicad LCSC Importer
+# KiCad LCSC Importer
 
 A plugin for KiCad 10 on Windows. Enter an LCSC part number to export the symbol, footprint, and 3D model (if available) to a library of your choice.
 
@@ -8,7 +8,7 @@ A plugin for KiCad 10 on Windows. Enter an LCSC part number to export the symbol
 
 ## Installation and usage
 
-1. Download `lcsc-importer-pcm.zip` from the repository's **Releases** section.
+1. Download `kicad-lcsc-importer.zip` from the repository's **Releases** section.
 2. In KiCad Manager, open **Plugin and Content Manager → Install from File…** and select the ZIP. If you installed a company-branded release, uninstall it and click **Apply Pending Changes** before installing this ZIP. The new package uses a different identifier.
 3. In **Preferences → Plugins**, turn on **Enable KiCad API**. Use the Python installation bundled with KiCad. KiCad installs the dependencies into the plugin's own environment the first time it loads.
 4. Reopen PCB Editor and click **Import LCSC** <img src="plugins/import-lcsc.png" alt="Import LCSC toolbar icon" width="24"> in the toolbar. Enter a part number such as `C116151` and a **Library name** such as `my_parts`, then click **Import**. The default library name is `lcsc_importer`. Library names can contain letters A–Z, digits, underscores, and hyphens. Windows device names are reserved.
@@ -19,7 +19,7 @@ The dialog remembers the library name from your last successful import and fills
 
 ## Add the exported symbol and footprint libraries
 
-In each library dialog, choose **Global Libraries** to use the library across projects or **Project Specific Libraries** to use it in the current project. Browse to the **Library folder** you selected during import. The default is `Documents/KiCad/10.0/libs`.
+In each library dialog, choose **Global Libraries** to use the library across projects or **Project Specific Libraries** to use it in the current project. Browse to the **Library folder** you selected during import. The default is `Documents/KiCad/10.0/libs`, or `10.0/libs` under `KICAD_DOCUMENTS_HOME` if that environment variable is set.
 
 1. In Schematic Editor, open **Preferences → Manage Symbol Libraries…**. Click the folder icon to add an existing library, select `my_parts.kicad_sym`, set the nickname to `my_parts`, and click **OK**.
 2. In PCB Editor, open **Preferences → Manage Footprint Libraries…**. Click the folder icon to add an existing library, select the `my_parts.pretty` folder, set the nickname to `my_parts`, and click **OK**. Use the library name from the import so the symbol’s footprint link resolves.
@@ -48,10 +48,16 @@ The plugin uses [uPesy's easyeda2kicad](https://github.com/uPesy/easyeda2kicad.p
 
 When a new upstream version is released, update the pin in `plugins/requirements.txt`, bump the plugin version in `metadata.json`, and test importing a part with a 3D model. The plugin reads the footprint path from the converter's log when linking 3D models, so verify that the footprint still resolves its model through the library's path variable after upgrading.
 
-To build the installation ZIP, open PowerShell in the repository root and run `build.py` with the Python executable bundled with KiCad 10. If you installed KiCad in a custom location, adjust the path to `python.exe` accordingly. Only the person packaging the release needs to run this command.
+To build the installation ZIP, open PowerShell in the repository root and run `build.py` with Python 3. The build script uses only the Python standard library.
 
 ```powershell
-& "${env:ProgramFiles}\KiCad\10.0\bin\python.exe" .\build.py
+python .\build.py
 ```
 
-Attach `dist/lcsc-importer-pcm.zip` to the GitHub Release. Users can download the ZIP and install it directly in KiCad.
+If PowerShell cannot find `python` and KiCad 10 was installed for your Windows user, use its bundled console Python:
+
+```powershell
+& "$env:LOCALAPPDATA\Programs\KiCad\10.0\bin\python.exe" .\build.py
+```
+
+Attach `dist/kicad-lcsc-importer.zip` to the GitHub Release. Users can download the ZIP and install it directly in KiCad.

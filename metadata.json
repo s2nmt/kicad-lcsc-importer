@@ -13,12 +13,12 @@
       "kicad_version": "10.0",
       "status": "testing",
       "runtime": "ipc",
-      "version": "1.0.3"
+      "version": "1.0.5"
     }
   ],
   "description_full": "Imports symbols, footprints and available 3D models using easyeda2kicad on Windows.",
-  "name": "Kicad LCSC Importer",
+  "name": "KiCad LCSC Importer",
   "resources": {
-    "upstream": "https://github.com/uPesy/easyeda2kicad.py"
+    "homepage": "https://github.com/s2nmt/kicad-lcsc-importer"
   }
 }

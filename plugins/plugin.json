@@ -1,7 +1,8 @@
 {
+  "$schema": "https://go.kicad.org/api/schemas/v1",
   "identifier": "local.robovix.lcsc-importer",
-  "name": "Kicad LCSC Importer",
-  "description": "Import LCSC parts into your KiCad library.",
+  "name": "KiCad LCSC Importer",
+  "description": "Import LCSC parts into your KiCad library on Windows.",
   "runtime": {
     "type": "python"
   },
